@@ -1,0 +1,29 @@
+{
+    "db": {
+        "dir": "./db"
+    },
+
+    "args": {
+        "options": {
+            "task": { "defaultOption": true, "multiple": true },
+            "diff": { "flag": true, "alias": "d" },
+            "at": { "flag": true, "alias": "t" },
+            "move": { "flag": true, "alias": "m" },
+            "delete": { "flag": true, "alias": "D", "type": "Boolean" },
+            "from": { "flag": true },
+            "to": { "flag": true },
+            "view-cli": { "flag": "print", "alias": "p", "type": "Boolean" }
+        }
+    },
+    "i18n": {
+        "taskAdded": "Task added.",
+        "taskMoved": "Task moved.",
+        "taskRemoved": "Task removed.",
+        "taskNotFound": "Task not found.",
+        "timePeriodError": "From is later than to.",
+        "dayFormat": "--- dddd, DD.MM.YYYY ---",
+        "taskFormat": "%s | %s",
+        "taskTimeFormat": "HH:mm",
+        "noTasksInPeriod": "No tasks found."
+    }
+}

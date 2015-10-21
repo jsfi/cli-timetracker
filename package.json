@@ -1,0 +1,47 @@
+{
+  "name": "timetracker",
+  "description": "tracks the time you work on tasks",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jsfi/timetracker",
+  "author": {
+    "name": "Martin Sachse",
+    "email": "martin.sachse@gmail.com",
+    "url": "http://jsfi.io"
+  },
+  "main": "index.js",
+  "bin": "./index.js",
+  "preferGlobal": true,
+  "scripts": {
+    "test": "node node_modules/eslint/bin/eslint.js index.js lib/*.js && node node_modules/mocha/bin/mocha test/**/*_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jsfi/timetracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jsfi/timetracker/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "keywords": [
+    "node",
+    "cli",
+    "time",
+    "tracker"
+  ],
+  "dependencies": {
+    "es6-promisify": "^3.0.0",
+    "level": "^1.3.0",
+    "moment": "^2.10.6",
+    "parse-cli-arguments": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^1.7.1",
+    "expect.js": "^0.3.1",
+    "mocha": "^2.3.3",
+    "rimraf": "^2.4.3",
+    "sinon": "^1.17.1"
+  }
+}
