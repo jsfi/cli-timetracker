@@ -133,6 +133,44 @@ timetracker -p --from yyyy-mm-dd --to yyyy-mm-dd
 //outputs all tasks between the from date and the to date
 ```
 
+### config/user
+
+All options and translations that are set in the ./config/default.json can be overridden by the ./config/user file. It can be a json-file like the default configuration, but it is also possible to have a user.js file that exports a configuration object.
+
+The default configuration and the user configuration will be merged by lodashs defaultsDeep-function.
+
+#### Example
+
+Renamed at alias to a and translated taskAdded message.
+
+```js
+{
+    "args": {
+        "options": {
+            "at": { "alias": "a" },
+        }
+    },
+    "i18n": {
+        "taskAdded": "Aufgabe hinzugefügt."
+    }
+}
+```
+
+As JSON-object or as JavaScript-module
+
+```js
+{
+    "args": {
+        "options": {
+            "at": { "alias": "a" },
+        }
+    },
+    "i18n": {
+        "taskAdded": "Aufgabe hinzugefügt."
+    }
+}
+```
+
 #### Alfred-Workflow
 
 The alfred-workflow will currently only work if you have nvm installed (~/.nvm/nvm.sh must be available)
