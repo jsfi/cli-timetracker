@@ -159,7 +159,7 @@ Renamed `at`-alias to `a` and translated `taskAdded`-message.
 As JSON-object or as JavaScript-module
 
 ```js
-module.exports: {
+module.exports = {
     args: {
         options: {
             at: { alias: 'a' },
