@@ -141,7 +141,7 @@ The default configuration and the user configuration will be merged by lodashs d
 
 #### Example
 
-Renamed at alias to a and translated taskAdded message.
+Renamed `at`-alias to `a` and translated `taskAdded`-message.
 
 ```js
 {
@@ -159,14 +159,14 @@ Renamed at alias to a and translated taskAdded message.
 As JSON-object or as JavaScript-module
 
 ```js
-{
-    "args": {
-        "options": {
-            "at": { "alias": "a" },
+module.exports: {
+    args: {
+        options: {
+            at: { alias: 'a' },
         }
     },
-    "i18n": {
-        "taskAdded": "Aufgabe hinzugefügt."
+    i18n: {
+        taskAdded: 'Aufgabe hinzugefügt.'
     }
 }
 ```
