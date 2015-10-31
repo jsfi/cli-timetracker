@@ -41,7 +41,7 @@ describe('Moved', function() {
 
             return doTracking(config, ['-t', `${hour}:${min}`, task])
             .then(() => {
-                expect(spyConsole.calledWith(config.i18n.taskAdded)).to.eql(true);
+                expect(spyConsole.calledWithMatch(/added\.$/)).to.eql(true);
             });
         });
     });

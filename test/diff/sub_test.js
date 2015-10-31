@@ -36,7 +36,7 @@ describe('Diff Negative', function() {
 
             return doTracking(config, ['-d', diff, task])
             .then(() => {
-                expect(spyConsole.calledWith(config.i18n.taskAdded)).to.eql(true);
+                expect(spyConsole.calledWithMatch(/added\.$/)).to.eql(true);
             });
         });
     });

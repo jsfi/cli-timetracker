@@ -38,7 +38,7 @@ describe('At DayTHour:Minute', function() {
 
             return doTracking(config, ['-t', `${day}T${hour}:${min}`, task])
             .then(() => {
-                expect(spyConsole.calledWith(config.i18n.taskAdded)).to.eql(true);
+                expect(spyConsole.calledWithMatch(/added\.$/)).to.eql(true);
             });
         });
     });
