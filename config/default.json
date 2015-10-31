@@ -16,7 +16,7 @@
         }
     },
     "i18n": {
-        "taskAdded": "Task added.",
+        "taskAdded": "%s | %s added.",
         "taskMoved": "Task moved.",
         "taskRemoved": "Task removed.",
         "taskNotFound": "Task not found.",
