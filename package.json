@@ -14,7 +14,7 @@
   },
   "preferGlobal": true,
   "scripts": {
-    "test": "node node_modules/eslint/bin/eslint.js index.js lib/*.js && node node_modules/mocha/bin/mocha test/**/*_test.js"
+    "test": "node node_modules/eslint/bin/eslint.js index.js lib/*.js view/*.js && node node_modules/mocha/bin/mocha test/**/*_test.js"
   },
   "repository": {
     "type": "git",
