@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 /*
- * timetracker
- * https://github.com/jsfi/timetracker
+ * cli-timetracker
+ * https://github.com/jsfi/cli-timetracker
  *
  * Copyright (c) 2015 Martin Sachse
  * Licensed under the MIT license.
