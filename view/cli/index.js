@@ -11,7 +11,7 @@
 const util = require('util');
 const moment = require('moment');
 
-module.exports = function(config) {
+module.exports = function(config, output) {
     return function(tasks) {
         let emptyLine = false;
 
@@ -21,19 +21,19 @@ module.exports = function(config) {
             }
 
             if (emptyLine) {
-                console.log(); // eslint-disable-line no-console
+                output();
             }
 
-            console.log(dayTasks.date.format(config.i18n.dayFormat)); // eslint-disable-line no-console
+            output(dayTasks.date.format(config.i18n.dayFormat));
             dayTasks.forEach(function(task) {
-                console.log(util.format(config.i18n.taskFormat, moment(task.time, 'X').format(config.i18n.taskTimeFormat), task.task)); // eslint-disable-line no-console
+                output(util.format(config.i18n.taskFormat, moment(task.time, 'X').format(config.i18n.taskTimeFormat), task.task));
             });
 
             emptyLine = true;
         });
 
         if (!emptyLine) {
-            console.log(config.i18n.noTasksInPeriod); // eslint-disable-line no-console
+            output(config.i18n.noTasksInPeriod);
         }
 
         return tasks;

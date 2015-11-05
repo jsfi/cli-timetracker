@@ -14,7 +14,7 @@ const doTracking = require('./doTracking.js');
 describe('Simple', function() {
     let config = require('../config/default');
     let clock;
-    let spyConsole;
+    let spyOutput;
     let task  = 'test';
     let timestamp;
     let now;
@@ -24,18 +24,18 @@ describe('Simple', function() {
         timestamp = (timestamp - (timestamp % 60)) * 1000;
 
         clock = sinon.useFakeTimers(timestamp);
-        spyConsole = sinon.spy(console, 'log');
+        spyOutput = sinon.spy();
 
         now = moment(timestamp, 'x');
     });
 
     describe('write', function() {
         it('task added', function () {
-            spyConsole.reset();
+            spyOutput.reset();
 
-            return doTracking(config, [task])
+            return doTracking(config, spyOutput, [task])
             .then(() => {
-                expect(spyConsole.calledWith(config.i18n.taskAdded)).to.eql(true);
+                expect(spyOutput.calledWith(config.i18n.taskAdded)).to.eql(true);
             });
         });
     });
@@ -44,28 +44,27 @@ describe('Simple', function() {
         let wait;
 
         it('read date', function () {
-            spyConsole.reset();
-            return wait = doTracking(config, ['-p']).then(() => {
-                expect(spyConsole.args[0][0]).to.contain(now.format(config.i18n.dayFormat));
+            spyOutput.reset();
+            return wait = doTracking(config, spyOutput, ['-p']).then(() => {
+                expect(spyOutput.args[0][0]).to.contain(now.format(config.i18n.dayFormat));
             });
         });
 
          it('read task', function () {
              return wait.then(() => {
-                 expect(spyConsole.args[1][0]).to.contain(task);
+                 expect(spyOutput.args[1][0]).to.contain(task);
              });
         });
 
         it('read time', function () {
             return wait.then(() => {
-                expect(spyConsole.args[1][0]).to.contain(now.format(config.i18n.taskTimeFormat));
+                expect(spyOutput.args[1][0]).to.contain(now.format(config.i18n.taskTimeFormat));
             });
         });
     });
 
     after(function() {
         clock.restore();
-        console.log.restore(); // eslint-disable-line no-console
         require('./testDb').reset();
     });
 });

@@ -14,7 +14,7 @@ const doTracking = require('../doTracking.js');
 describe('Moved', function() {
     let config = require('../../config/default');
     let clock;
-    let spyConsole;
+    let spyOutput;
     let hour = '5';
     let min = '10';
     let task  = 'test';
@@ -26,18 +26,18 @@ describe('Moved', function() {
         timestamp = (timestamp - (timestamp % 60)) * 1000;
 
         clock = sinon.useFakeTimers(timestamp);
-        spyConsole = sinon.spy(console, 'log');
+        spyOutput = sinon.spy();
 
         now = moment(timestamp, 'x').minute(min).hour(hour);
     });
 
     describe('write', function() {
         it('task added', function () {
-            spyConsole.reset();
+            spyOutput.reset();
 
-            return doTracking(config, ['-t', `${hour}:${min}`, task])
+            return doTracking(config, spyOutput, ['-t', `${hour}:${min}`, task])
             .then(() => {
-                expect(spyConsole.calledWithMatch(/added\.$/)).to.eql(true);
+                expect(spyOutput.calledWithMatch(/added\.$/)).to.eql(true);
             });
         });
     });
@@ -46,48 +46,47 @@ describe('Moved', function() {
         let wait;
 
         it('read date', function () {
-            spyConsole.reset();
-            return wait = doTracking(config, ['-p', '-t', `${hour}:${min}`]).then(() => {
-                expect(spyConsole.args[0][0]).to.contain(now.format(config.i18n.dayFormat));
+            spyOutput.reset();
+            return wait = doTracking(config, spyOutput, ['-p', '-t', `${hour}:${min}`]).then(() => {
+                expect(spyOutput.args[0][0]).to.contain(now.format(config.i18n.dayFormat));
             });
         });
 
          it('read task', function () {
              return wait.then(() => {
-                 expect(spyConsole.args[1][0]).to.contain(task);
+                 expect(spyOutput.args[1][0]).to.contain(task);
              });
         });
 
         it('read time', function () {
             return wait.then(() => {
-                expect(spyConsole.args[1][0]).to.contain(now.format(config.i18n.taskTimeFormat));
+                expect(spyOutput.args[1][0]).to.contain(now.format(config.i18n.taskTimeFormat));
             });
         });
     });
 
     describe('delete', function() {
         it('task moved', function () {
-            spyConsole.reset();
+            spyOutput.reset();
 
-            return doTracking(config, ['-t', `${hour}:${min}`, '-D'])
+            return doTracking(config, spyOutput, ['-t', `${hour}:${min}`, '-D'])
             .then(() => {
-                expect(spyConsole.calledWith(config.i18n.taskRemoved)).to.eql(true);
+                expect(spyOutput.calledWith(config.i18n.taskRemoved)).to.eql(true);
             });
         });
     });
 
     describe('read moved', function() {
         it('read date', function () {
-            spyConsole.reset();
-            doTracking(config, ['-p']).then(() => {
-                expect(spyConsole.calledWith(config.i18n.noTasksInPeriod)).to.eql(true);
+            spyOutput.reset();
+            doTracking(config, spyOutput, ['-p']).then(() => {
+                expect(spyOutput.calledWith(config.i18n.noTasksInPeriod)).to.eql(true);
             });
         });
     });
 
     after(function() {
         clock.reset();
-        console.log.restore(); // eslint-disable-line no-console
         require('../testDb').reset();
     });
 });

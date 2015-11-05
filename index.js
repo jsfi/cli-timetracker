@@ -14,5 +14,6 @@ const config = require('./lib/loadConfig');
 require('./lib/controller.js')(
     require('./lib/args.js')(config.args),
     require('./lib/tasks')(config, require('./lib/db')(config.db)),
-    config
+    config,
+    require('./lib/output')
 );
