@@ -6,6 +6,10 @@
 
 This is a very early release. Changes and a real readme will follow soon.
 
+## Next todo
+
+Catch errors for proper error-messages.
+
 ## Getting Started
 
 Clone the repository, then link it with npm:
