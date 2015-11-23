@@ -10,10 +10,13 @@
 'use strict';
 
 const config = require('./lib/loadConfig');
+const errorMessage = require('./lib/catch.js');
 
-require('./lib/controller.js')(
-    require('./lib/args.js')(config.args),
-    require('./lib/tasks')(config, require('./lib/db')(config.db)),
-    config,
-    require('./lib/output')
-);
+try {
+    require('./lib/controller.js')(
+        require('./lib/args.js')(config.args),
+        require('./lib/tasks')(config, require('./lib/db')(config.db)),
+        config,
+        require('./lib/output')
+    ).catch(errorMessage);
+} catch(e) { errorMessage(e); }
